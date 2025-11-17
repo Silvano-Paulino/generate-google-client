@@ -1,0 +1,7 @@
+{
+  "devDependencies": {
+    "@types/node": "^24.6.0",
+    "googleapis": "^160.0.0",
+    "ts-node": "^10.9.2"
+  }
+}
