@@ -2,20 +2,31 @@ import fs from "fs";
 import { google } from "googleapis";
 import path from "path";
 import readline from "readline";
+import dotenv from "dotenv"
 
-const TOKEN_PATH = path.join(".", "token.json");
+dotenv.config()
+
+const TOKEN_PATH = path.join("/", "token.json");
 const SCOPE = ["https://www.googleapis.com/auth/gmail.send"];
 
 async function main() {
-    const credentials = JSON.parse(
-        fs.readFileSync("./credentials.json", "utf8"),
-    );
-    const { client_secret, client_id, redirect_uris } = credentials.installed;
+    
+    if (!process.env.CLIENT_ID) {
+        throw new Error("CLIENT_ID is not defined.")
+    }
+
+    if (!process.env.CLIENT_SECRET) {
+        throw new Error("CLIENT_SECRET is not defined.")
+    }
+
+    if (!process.env.CLIENT_REDIRECT_URI) {
+        throw new Error("CLIENT_REDIRECT_URI is not defined.")
+    }
 
     const oAuth2Client = new google.auth.OAuth2(
-        client_id,
-        client_secret,
-        redirect_uris[0],
+        process.env.CLIENT_ID,
+        process.env.CLIENT_SECRET,
+        process.env.CLIENT_REDIRECT_URI,
     );
 
     const authUrl = oAuth2Client.generateAuthUrl({
