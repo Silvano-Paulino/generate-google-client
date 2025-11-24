@@ -1,4 +1,5 @@
 import fs from "fs";
+import os from "os"
 import { google } from "googleapis";
 import path from "path";
 import readline from "readline";
@@ -6,7 +7,13 @@ import dotenv from "dotenv"
 
 dotenv.config()
 
-const TOKEN_PATH = path.join("/", "token.json");
+const downloadsDir = path.join(os.homedir(), "Downloads");
+
+if (!fs.existsSync(downloadsDir)) {
+  fs.mkdirSync(downloadsDir);
+}
+
+const TOKEN_PATH = path.join(downloadsDir, "token.json");
 const SCOPE = ["https://www.googleapis.com/auth/gmail.send"];
 
 async function main() {
