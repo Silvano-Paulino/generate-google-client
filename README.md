@@ -100,5 +100,4 @@ Agora já podes utilizar as APIs Google com OAuth2 no teu projeto TypeScript.
 
 Com o refresh token obtido, tens autenticação contínua para realizar qualquer requisição via Google APIs, sem precisar de pedir login ao utilizador.
 
----
 
